@@ -1,0 +1,316 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IM+Fell+Great+Primer+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wallpoet&display=swap');
+
+/* Reset básico e box-sizing para todos os elementos */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0; /* Garante que não haja margens padrão que possam causar overflow */
+    padding: 0; /* Garante que não haja paddings padrão */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Usa min-height para garantir que o corpo se estenda */
+    color: #fff;
+    background: url(merlin-fundo.jpg) center center no-repeat;
+    background-size: cover;
+    display: flex; /* Para centralizar o container */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: flex-start; /* Alinha no topo para que o margin-top do container funcione */
+    font-family: "IM Fell Great Primer SC", serif;
+    /* overflow-x: hidden; Adicionando de volta, mas com a prioridade de consertar o que causa o overflow */
+    overflow-x: hidden; /* Se o problema persistir, isso vai esconder, mas ainda é bom resolver a causa */
+    overflow-y: auto; /* Permite rolagem vertical se o conteúdo for maior que a tela */
+}
+
+:root {
+    font-size: 16px;
+}
+
+.cabecalho {
+    border-bottom: #2a0033 2px solid;
+    border-top: #2a0033 2px solid;
+    background-color: #1f0538;
+    width: 100%; /* Garante que o cabeçalho ocupe 100% da largura do seu PARENT (container) */
+    border-top-left-radius: 38px;
+    border-top-right-radius: 38px;
+    padding: 10px 0;
+}
+.tp h1 {
+    font-size: 1.8em;
+    font-weight: 400;
+    padding: 0 5px;
+    margin-top: 0px;
+    color: #dbccdf;
+    text-shadow: 1px 1px 2px #2a0033;
+    line-height: 1.2em;
+}
+.tp {
+    text-align: center;
+}
+.cabecalho h2 {
+    font-size: 1.2em;
+    padding: 0.5px;
+    margin-bottom: 0px;
+    font-weight: 400;
+    color: #dbccdf;
+    line-height: 1.2em;
+}
+.cabecalho h2::before {
+    content: url(coração.png);
+    margin: 0;
+    position: relative;
+    top: 5px;
+    padding: 0 5px;
+    vertical-align: middle;
+    display: inline-block;
+    transform: scale(0.6);
+    transform-origin: center center;
+}
+
+.container {
+    height: auto;
+    width: 90%; /* Vamos tentar 90% como um bom ponto de partida */
+    max-width: 400px;
+    text-align: center;
+    background-color: rgba(12, 6, 19, 0.753);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantenha isso para cortar qualquer coisa que saia do container */
+    border-radius: 40px;
+    box-shadow: 0 4px 8px #2a0033;
+    border: 2px solid #2a0033;
+    margin: 40px auto; /* Mantém o margin-auto para centralizar */
+    flex-shrink: 0; /* Evita que o container encolha além do necessário */
+    padding-bottom: 20px;
+}
+
+.content-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 25px;
+}
+
+.event-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #dbccdf;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.timer-display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 3px;
+    margin-bottom: 0px;
+    white-space: nowrap; /* Impede que os números quebrem a linha */
+}
+
+.timer-number {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-size: 2.8rem;
+    color: #fff;
+    text-shadow: 0 0 5px #e0b0ff, 0 0 15px rgba(224, 176, 255, 0.3);
+    line-height: 1em;
+}
+
+.timer-separator {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #ff00ff;
+    text-shadow: 0 0 5px #ff00ff;
+    margin: 0 2px;
+    line-height: 1em;
+}
+
+.timer-labels {
+    display: flex;
+    justify-content: space-around;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    color: #ccc;
+    margin-top: 2px;
+    padding: 0 10px; /* Reduzi o padding para dar mais espaço no mobile */
+}
+
+.label {
+    text-transform: uppercase;
+    font-weight: 500;
+    flex: 1; /* Garante que as labels tentem ocupar espaço igual */
+    text-align: center; /* Centraliza o texto dentro de cada label */
+}
+
+.styled-separator {
+    width: 80%;
+    height: 2px;
+    background-color: #2a0033;
+    margin: 0 auto;
+    border-radius: 1px;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* Adicionar overflow: hidden; aqui não resolve o problema do coração se ele estiver na posição absoluta com left/right negativos */
+    /* Ele precisaria estar dentro do fluxo do separador para ser escondido */
+}
+
+.styled-separator::before,
+.styled-separator::after {
+    content: url(coração.png);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.4);
+    display: inline-block;
+    /* Remova o overflow: hidden; daqui, pois não é o local ideal para ele com absolute positioning */
+}
+
+.styled-separator::before {
+    left: -15px; /* Aumentei um pouco para testar */
+}
+.styled-separator::after {
+    right: -15px; /* Aumentei um pouco para testar */
+}
+.final-text {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #dbccdf;
+    margin-top: 15px;
+    text-shadow: 0 0 3px #ff00ff;
+}
+
+/* ========================================= */
+/* MEDIA QUERIES (ATUALIZE ESTAS SEÇÕES TAMBÉM) */
+/* ========================================= */
+@media(min-width:600px){
+    body{
+        /* display: flex; e justify/align já estão no body principal, não precisam ser repetidos aqui */
+        align-items: center; /* Centraliza verticalmente o container */
+    }
+
+    .container{
+        margin: auto; /* Centraliza perfeitamente em telas maiores */
+    }
+}
+
+
+@media (max-width: 600px) {
+    .timer-number {
+        font-size: 2rem; /* Leve ajuste para garantir que caiba */
+    }
+    .timer-separator {
+        font-size: 1.1rem; /* Leve ajuste */
+        margin: 0 0.5px; /* Reduzir mais o espaço */
+    }
+    .timer-display {
+        gap: 1px; /* Gap ainda menor */
+    }
+    .event-title {
+        font-size: 0.95rem; /* Leve ajuste para títulos */
+    }
+    .timer-labels {
+        font-size: 0.65rem; /* Ajuste para mobile */
+        padding: 0 2px; /* Reduzir ainda mais o padding */
+        justify-content: space-between; /* Melhor para espaçar as labels */
+    }
+    .label {
+        flex: 1; /* Garante que se expandam para preencher o espaço */
+        text-align: center;
+    }
+    .styled-separator {
+        width: 80%; /* Pode voltar para 80% ou deixar em 70% */
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .styled-separator::before,
+    .styled-separator::after {
+        transform: translateY(-50%) scale(0.25); /* Corações menores */
+        left: -8px; /* Ajuste para tentar conter */
+        right: -8px; /* Ajuste para tentar conter */
+    }
+
+    .container {
+        width: 98%; /* Tentar 98% para deixar uma pequena margem visual */
+        /* min-width: unset; max-width: unset; já feito anteriormente */
+        margin: 15px auto; /* Adicione um pouco de margin para não colar nas bordas */
+        padding-bottom: 15px; /* Reduzir padding inferior para mobile */
+    }
+    .cabecalho {
+        padding: 5px 0;
+    }
+    .cabecalho h2 {
+        font-size: 0.9rem;
+    }
+    .tp h1 {
+        font-size: 1.3rem;
+    }
+    .cabecalho h2::before {
+        top: 2px; /* Ajustar posição vertical do coração */
+        transform: scale(0.4); /* Ajustar tamanho do coração */
+    }
+}
+
+@media (max-width: 375px) { /* Adicionei um breakpoint específico para 375px (iPhone SE, etc.) */
+    .timer-number {
+        font-size: 1.8rem;
+    }
+    .timer-separator {
+        font-size: 1rem;
+        margin: 0; /* Sem margem para os separadores em telas muito pequenas */
+    }
+    .timer-display {
+        gap: 0; /* Sem gap em telas muito pequenas */
+    }
+    .timer-labels {
+        font-size: 0.6rem;
+        padding: 0; /* Sem padding nas labels para máximo espaço */
+    }
+    .styled-separator::before,
+    .styled-separator::after {
+        transform: translateY(-50%) scale(0.2); /* Corações ainda menores */
+        left: -5px;
+        right: -5px;
+    }
+    .container {
+        width: 98%;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 320px) { /* Breakpoint para telas muito pequenas */
+    .timer-number {
+        font-size: 1.6rem;
+    }
+    .timer-separator {
+        font-size: 0.9rem;
+    }
+    .timer-labels {
+        font-size: 0.55rem;
+    }
+    .cabecalho h2 {
+        font-size: 0.8rem;
+    }
+    .tp h1 {
+        font-size: 1.1rem;
+    }
+    .container {
+        width: 99%;
+        margin: 5px auto;
+    }
+    .styled-separator::before,
+    .styled-separator::after {
+        transform: translateY(-50%) scale(0.18); /* Corações mínimos */
+        left: -3px;
+        right: -3px;
+    }
+}
