@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* FONTES */
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IM+Fell+Great+Primer+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wallpoet&display=swap');
 
 /* Reset básico e box-sizing para todos os elementos */
@@ -13,31 +14,55 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100vh; /* Garante que o corpo preencha a altura da viewport */
     color: #fff;
     background: url(merlin-fundo.jpg) center center no-repeat;
     background-size: cover;
-    display: flex; /* Mantém flex para centralização */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* **MUDEI AQUI PARA TENTAR CENTRALIZAR VERTICALMENTE POR PADRÃO** */
+    background-attachment: fixed; /* Mantém o fundo fixo ao rolar */
+    display: flex; /* Permite centralizar o container */
+    justify-content: center; /* Centraliza horizontalmente o container */
+    align-items: center; /* Centraliza verticalmente o container no body */
     font-family: "IM Fell Great Primer SC", serif;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    overflow-y: auto; /* Permite rolagem vertical se o conteúdo for maior que a tela */
 }
 
 :root {
     font-size: 16px;
 }
 
-.cabecalho {
-    border-bottom: #2a0033 2px solid;
-    border-top: #2a0033 2px solid;
-    background-color: #1f0538;
-    width: 100%;
-    border-top-left-radius: 38px;
-    border-top-right-radius: 38px;
-    padding: 10px 0;
+/* CONTAINER */
+.container {
+    height: auto; /* Altura flexível */
+    width: 90%; /* Largura padrão para desktop e telas maiores */
+    max-width: 400px; /* Limita a largura máxima em telas maiores */
+    text-align: center;
+    background-color: rgba(12, 6, 19, 0.753); /* Fundo do container */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* ESSENCIAL para as bordas arredondadas funcionarem no cabeçalho */
+    border-radius: 40px; /* Bordas arredondadas do container */
+    box-shadow: 0 4px 8px #2a0033;
+    border: 2px solid #2a0033;
+    margin: auto; /* Centraliza o container dentro do body (quando body é flex) */
+    padding-bottom: 20px; /* Espaço na parte inferior do container */
+    padding-top: 0; /* Não precisa de padding aqui, o cabeçalho é o primeiro elemento */
+    flex-shrink: 0; /* Evita que o container encolha demais em telas muito pequenas */
 }
+
+/* CABECALHO - CORREÇÃO DA FAIXA PRETA AQUI */
+.cabecalho {
+    background-color: #1f0538;
+    width: 100%; /* Ocupa 100% da largura do seu PARENT (container) */
+    padding: 10px 0;
+    border-bottom: #2a0033 2px solid;
+    border-top: #2a0033 2px solid; /* Manter a borda superior para visual */
+    /* As bordas arredondadas do cabeçalho devem casar com as do container */
+    border-top-left-radius: 38px; /* Ligeiramente menor que o container (40px) para um melhor encaixe */
+    border-top-right-radius: 38px; /* Ligeiramente menor que o container (40px) para um melhor encaixe */
+    /* Não precisa de 'position: absolute' ou 'width: 100vw' se ele estiver dentro do container */
+}
+
 .tp h1 {
     font-size: 1.8em;
     font-weight: 400;
@@ -70,26 +95,8 @@ html, body {
     transform-origin: center center;
 }
 
-.container {
-    height: auto;
-    width: 90%; /* Ajustei para 90% para dar um respiro nas laterais */
-    max-width: 400px;
-    text-align: center;
-    background-color: rgba(12, 6, 19, 0.753);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 40px;
-    box-shadow: 0 4px 8px #2a0033;
-    border: 2px solid #2a0033;
-    margin: auto; /* **MUDEI PARA AUTO PARA CENTRALIZAR VERTICALMENTE SEMPRE** */
-    flex-shrink: 0;
-    padding-bottom: 20px;
-    padding-top: 0; /* Certifica que o padding-top não está adicionando espaço indesejado */
-}
-
 .content-section {
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
     display: flex;
     flex-direction: column;
     padding: 20px 15px;
@@ -112,7 +119,7 @@ html, body {
     align-items: baseline;
     gap: 3px;
     margin-bottom: 0px;
-    white-space: nowrap;
+    white-space: nowrap; /* Evita que os números quebrem linha */
 }
 
 .timer-number {
@@ -121,7 +128,7 @@ html, body {
     font-size: 2.8rem;
     color: #fff;
     text-shadow: 0 0 5px #e0b0ff, 0 0 15px rgba(224, 176, 255, 0.3);
-    line-height: 1em;
+    line-height: 1em; /* Ajusta a altura da linha para evitar espaços extras */
 }
 
 .timer-separator {
@@ -131,25 +138,25 @@ html, body {
     color: #ff00ff;
     text-shadow: 0 0 5px #ff00ff;
     margin: 0 2px;
-    line-height: 1em;
+    line-height: 1em; /* Ajusta a altura da linha */
 }
 
 .timer-labels {
     display: flex;
-    justify-content: space-around; /* Mantive space-around aqui */
+    justify-content: space-around; /* Distribui as labels uniformemente */
     font-family: "Poppins", sans-serif;
     font-size: 0.8rem;
     color: #ccc;
-    margin-top: 5px; /* **AUMENTEI UM POUCO O MARGIN-TOP PARA AS LABELS** */
+    margin-top: 5px; /* Espaço entre os números e as labels */
     padding: 0 10px;
 }
 
-.label {
+.label { /* A classe agora é 'label' */
     text-transform: uppercase;
     font-weight: 500;
-    flex: 1;
-    text-align: center; /* Garante que o texto esteja centralizado sob os números */
-    min-width: 0; /* Adicionei min-width para flex-item para evitar overflow em telas muito pequenas */
+    flex: 1; /* Permite que cada label ocupe um espaço igual */
+    text-align: center; /* Centraliza o texto de cada label */
+    min-width: 0; /* Essencial para flex-items em telas pequenas */
 }
 
 .styled-separator {
@@ -188,18 +195,17 @@ html, body {
 }
 
 /* ========================================= */
-/* MEDIA QUERIES (ATUALIZE ESTAS SEÇÕES TAMBÉM) */
+/* MEDIA QUERIES */
 /* ========================================= */
-@media(min-width:600px){
-    body{
-        align-items: center; /* Centraliza verticalmente o container em telas maiores */
-    }
 
-    .container{
-        margin: auto; /* Centraliza perfeitamente em telas maiores, incluindo verticalmente */
+/* Desktop (min-width: 600px) - O container já está centralizado pelo body */
+@media (min-width: 600px) {
+    .container {
+        margin: auto; /* Continua centralizado */
     }
 }
 
+/* Mobile (max-width: 600px) */
 @media (max-width: 600px) {
     .timer-number {
         font-size: 2.2rem;
@@ -217,13 +223,13 @@ html, body {
     .timer-labels {
         font-size: 0.7rem;
         padding: 0 5px;
-        margin-top: 3px; /* **AJUSTADO: Aumentei um pouco o margin-top para as labels no mobile** */
-        justify-content: space-between;
+        margin-top: 3px;
+        justify-content: space-between; /* Melhor para espaçamento em telas menores */
     }
     .label {
         flex: 1;
         text-align: center;
-        min-width: 0; /* Para garantir que as labels não causem overflow */
+        min-width: 0;
     }
     .styled-separator {
         width: 80%;
@@ -238,14 +244,17 @@ html, body {
     }
 
     .container {
-        width: 95%; /* Mantenha uma largura que dê respiro nas laterais */
-        max-width: unset; /* Remove o max-width para que width: 95% seja mais eficaz */
-        margin: 30px auto; /* **AJUSTADO: Aumentei o margin vertical para afastar do topo/base** */
-        padding-bottom: 15px;
-        padding-top: 15px; /* **ADICIONEI: Um pouco de padding no topo do container para afastar do cabeçalho** */
+        width: 95%; /* Ligeiramente maior em mobile para preencher mais */
+        max-width: unset; /* Remove o max-width para que width: 95% seja eficaz */
+        /* Para o S20 FE/Amino: Margem vertical para afastar do topo/base */
+        margin-top: 30px;
+        margin-bottom: 30px;
+        /* As bordas arredondadas do cabeçalho são definidas no próprio .cabecalho */
     }
     .cabecalho {
         padding: 5px 0;
+        border-top-left-radius: 38px; /* Mantenha o mesmo border-radius do container aqui */
+        border-top-right-radius: 38px; /* Mantenha o mesmo border-radius do container aqui */
     }
     .cabecalho h2 {
         font-size: 0.9rem;
@@ -259,6 +268,7 @@ html, body {
     }
 }
 
+/* Mobile (max-width: 375px) - Ajustes finos para telas menores como iPhone SE */
 @media (max-width: 375px) {
     .timer-number {
         font-size: 1.8rem;
@@ -273,7 +283,7 @@ html, body {
     .timer-labels {
         font-size: 0.6rem;
         padding: 0;
-        margin-top: 2px; /* **AJUSTADO: Mais um ajuste fino para telas pequenas** */
+        margin-top: 2px;
     }
     .styled-separator::before,
     .styled-separator::after {
@@ -282,13 +292,17 @@ html, body {
         right: -5px;
     }
     .container {
-        width: 98%;
-        margin: 20px auto; /* **AJUSTADO: Mais margin vertical para telas muito pequenas** */
-        padding-top: 10px; /* Ajuste padding-top */
-        padding-bottom: 10px; /* Ajuste padding-bottom */
+        width: 98%; /* Para telas muito pequenas, use quase a largura total */
+        margin-top: 20px; /* Reduz a margem superior para economizar espaço */
+        margin-bottom: 20px; /* Reduz a margem inferior */
+    }
+    .cabecalho {
+        border-top-left-radius: 35px; /* Ajuste ligeiro */
+        border-top-right-radius: 35px; /* Ajuste ligeiro */
     }
 }
 
+/* Mobile (max-width: 320px) - Para telas ultra-pequenas */
 @media (max-width: 320px) {
     .timer-number {
         font-size: 1.6rem;
@@ -298,7 +312,7 @@ html, body {
     }
     .timer-labels {
         font-size: 0.55rem;
-        margin-top: 1px; /* **AJUSTADO: Mínimo margin-top para labels** */
+        margin-top: 1px;
     }
     .cabecalho h2 {
         font-size: 0.8rem;
@@ -308,9 +322,12 @@ html, body {
     }
     .container {
         width: 99%;
-        margin: 10px auto; /* **AJUSTADO: Menor margin vertical para telas ultra-pequenas** */
-        padding-top: 8px;
-        padding-bottom: 8px;
+        margin-top: 10px; /* Margem mínima para telas muito pequenas */
+        margin-bottom: 10px;
+    }
+    .cabecalho {
+        border-top-left-radius: 30px; /* Ajuste ligeiro */
+        border-top-right-radius: 30px; /* Ajuste ligeiro */
     }
     .styled-separator::before,
     .styled-separator::after {
